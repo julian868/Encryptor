@@ -35,7 +35,7 @@ public class KeyGen {
         KeyStore keyStore = KeyStore.getInstance("JCEKS");
         //load KeyStore object
         char[] password = "changeit".toCharArray();
-        String path = "C:/Program Files/Java/jdk-18.0.1.1/lib/security/cacerts";
+        String path = "C:/Users/Julia/Documents/cacerts";
         java.io.FileInputStream fis = new FileInputStream(path);
         keyStore.load(fis, password);
 
@@ -44,12 +44,13 @@ public class KeyGen {
 
         //create SecretKeyEntry object
         KeyStore.SecretKeyEntry secretKeyEntry = new KeyStore.SecretKeyEntry(key);
-        keyStore.setEntry("secretKeyAlias", secretKeyEntry, protectionParam);
+        keyStore.setEntry("secretKeyAlias2", secretKeyEntry, protectionParam);
 
         //store KeyStore object
-        java.io.FileOutputStream fos = new java.io.FileOutputStream("AESKey");
+        java.io.FileOutputStream fos = new java.io.FileOutputStream(path);
         keyStore.store(fos, password);
-        System.out.println("Encryption Key Stored");
+        if(keyStore.containsAlias("secretkeyAlias2")){System.out.println("Key Stored Successfully");}
+
 
     }
 
@@ -59,19 +60,16 @@ public class KeyGen {
 
         //load KeyStore object
         char[] password = "changeit".toCharArray();
-        String path = "C:/Program Files/Java/jdk-18.0.1.1/lib/security/cacerts";
-        java.io.FileInputStream fis = new FileInputStream(path);
+        String path = "C:/Users/Julia/Documents/cacerts";
+        FileInputStream fis = new FileInputStream(path);
         keyStore.load(fis, password);
 
         //create KeyStore.ProtectionParameter object
         KeyStore.ProtectionParameter protectionParam = new KeyStore.PasswordProtection(password);
 
         //create KeyStore.SecretKeyEntry object
-        SecretKeyEntry secretKeyEntry = (SecretKeyEntry) keyStore.getEntry("secretKeyAlias", protectionParam);
-
+        SecretKeyEntry secretKeyEntry = (SecretKeyEntry) keyStore.getEntry("secretKeyAlias2", protectionParam);
         SecretKey secretKey = secretKeyEntry.getSecretKey();
-        System.out.println("Algorithm used to generate key: " + secretKey.getAlgorithm());
-        System.out.println("Format used for the Key: " + secretKey.getFormat());
         return secretKey;
     }
 }
