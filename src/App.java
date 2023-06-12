@@ -5,8 +5,6 @@ import javax.crypto.spec.IvParameterSpec;
 public class App {
     public static void main(String[] args) throws Exception {
         String algorithm = "AES/CBC/PKCS5Padding";
-        IvParameterSpec ivParameterSpec = new IvGen().ivGen();
-        SecretKey key = new KeyGen().loadKey();
         Scanner scan = new Scanner(System.in);
         int c = 0;
         while (c != 3) {
@@ -16,17 +14,20 @@ public class App {
                 case 1: {
                     System.out.println("Enter Text To Encrypt:");
                     String inputText = scan.nextLine();
+                    System.out.println("Enter Secret Key:");
+                    String password = scan.nextLine();
+                    IvParameterSpec ivParameterSpec = new IvGen().ivGen();
+                    SecretKey key = new KeyGen().genPassKey(password, algorithm);
                     String cipherText = new Encryptor().encrypt(algorithm, inputText, key, ivParameterSpec);
-                    // String plainText = new Encryptor().decrypt(algorithm, cipherText, key, ivParameterSpec);
-                    // if (inputText.equals(plainText))
-                    //     System.out.println("Encryption Successful");
                     System.out.println("Cipher Text:\n" + cipherText);
-                    //System.out.println("Original Text: " + new Encryptor().decrypt(algorithm, cipherText, key, ivParameterSpec));
                     break;
                 }
                 case 2: {
                     System.out.println("Enter CypherText To Decrypt");
                     String inputCypher = scan.nextLine();
+                    System.out.println("Enter Secret Key:");
+                    String password = scan.nextLine();
+                    SecretKey key = new KeyGen().genPassKey(password, algorithm);
                     String plainText = new Encryptor().decrypt(algorithm, inputCypher, key);
                     System.out.println("Decrypted Text:\n" + plainText);
                     break;
