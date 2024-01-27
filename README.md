@@ -1,18 +1,13 @@
-## Getting Started
+## Java Encryptor
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This JAVA console application encrypts text inputted by the user and returns cypher text using the AES algorithm.
 
-## Folder Structure
+## Operation
 
-The workspace contains two folders by default, where:
+User selects either encryption or decryption mode.
+Encryption -  In encryption mode the user enters the text to be decoded, followed by a secret key which is used to encrypt the text. The ciphertext is then produced and displayed in the console.
+Decryption - In decryption mode the user enters the ciphertext which includes the appended IV along with the secret key. The original plain text is then produced and displayed in the console.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Demo
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+![](assets/encryptor_demo.jpg)
